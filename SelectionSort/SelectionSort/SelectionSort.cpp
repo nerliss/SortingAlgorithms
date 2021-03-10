@@ -2,43 +2,47 @@
 
 using namespace std;
 
-int main()
+void printArray(int arr[], int n)
 {
-	const int n = 5;
-	int a[n], i, p, k, min, loc, temp;
-
-	cout << "\nSELECTION SORT\n\n";
-
-	cout << "\nEnter elements: ";
-	for (i = 1; i <= n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		cin >> a[i];
+		cout << arr[i] << ' ';
 	}
+	cout << endl;
+}
 
-	for (p = 1; p <= n; p++)
+void swap(int* posX, int* posY)
+{
+	int temp = *posX;
+	*posX = *posY;
+	*posY = temp;
+}
+
+void selectionSort(int arr[], int n)
+{
+	int minIndex;
+
+	for (int i = 0; i < n - 1; i++)
 	{
-		min = a[p];
-		loc = p;
-
-		for (k = p + 1; k <= n; k++)
+		minIndex = i;
+		for (int j = i + 1; j < n; j++)
 		{
-			if (min > a[k])
+			if (arr[j] < arr[minIndex])
 			{
-				min = a[k];
-				loc = k;
+				minIndex = j;
 			}
 		}
-		temp = a[p];
-		a[p] = a[loc];
-		a[loc] = temp;
+		swap(&arr[minIndex], &arr[i]);
 	}
+}
 
-	cout << "\nSorted array: \n";
+int main()
+{
+	int arr[] = { -23, 0, 2, 13, 65, -36, 54 };
+	int n = sizeof(arr) / sizeof(arr[0]);
 
-	for (i = 1; i <= n; i++)
-	{
-		cout << a[i] << ' ';
-	}
+	selectionSort(arr, n);
+	printArray(arr, n);
 
 	return 0;
 }
